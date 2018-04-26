@@ -115,7 +115,8 @@ int*    AllocInts(int  numInts)
     if(NULL == array)
     {
         puts("Wasn't able to allocate data.");
-        exit(EXIT_FAILURE);
+        ptr = NULL;
+        return ptr;
     }
 
     srand(time(NULL));
@@ -234,6 +235,12 @@ int     WriteInts(const char  *fname, const int  array[], int  numElems)
     auto FILE* file;
 
     file = fopen(fname, "w");
+
+    if(file == NULL)
+    {
+        printf("Error opening %s.\n", fname);
+        return FALSE;
+    }
 
     for(int index = 0; index < numElems; index++)
     {
